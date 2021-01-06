@@ -1,0 +1,42 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateGeolocationsTables extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('departaments', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('code');
+            //$table->timestamps();
+        });
+
+        Schema::create('municipalities', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('departament_id');
+            $table->string('code');
+            $table->string('name');
+            //$table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('departaments');
+        Schema::dropIfExists('municipalities');
+    }
+}
